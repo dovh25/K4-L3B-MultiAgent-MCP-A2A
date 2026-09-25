@@ -30,6 +30,16 @@ class ShipmentSpecialist:
         self.vault = vault
         self.trace = trace
 
+    def empty_result(self) -> ShipmentAnalysisResult:
+        """Return a default result without making any MCP calls."""
+        return ShipmentAnalysisResult(
+            verdict="insufficient_evidence",
+            late_seller_ids=[],
+            timeline_complete=False,
+            seller_ids=[],
+            shipment_ids=[],
+        )
+
     async def analyze(
         self, order_id: str, case_id: str, primary_claim_topic: str
     ) -> ShipmentAnalysisResult:

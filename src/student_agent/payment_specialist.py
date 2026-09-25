@@ -32,6 +32,16 @@ class PaymentSpecialist:
         self.vault = vault
         self.trace = trace
 
+    def empty_result(self) -> PaymentAnalysisResult:
+        """Return a default result without making any MCP calls."""
+        return PaymentAnalysisResult(
+            verdict="insufficient_evidence",
+            captured_total_brl=0.0,
+            refunded_total_brl=0.0,
+            refundable_total_brl=0.0,
+            payment_references=[],
+        )
+
     async def analyze(
         self, order_id: str, case_id: str, primary_claim_topic: str
     ) -> PaymentAnalysisResult:
